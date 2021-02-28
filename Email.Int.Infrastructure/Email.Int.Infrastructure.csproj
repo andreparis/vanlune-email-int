@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.SQSEvents" Version="1.2.0" />
+    <PackageReference Include="AWSSDK.Core" Version="3.5.3.1" />
+    <PackageReference Include="AWSSDK.S3" Version="3.5.8.7" />
+    <PackageReference Include="AWSSDK.SecretsManager" Version="3.5.0.71" />
+    <PackageReference Include="AWSSDK.SimpleEmail" Version="3.5.0.71" />
+    <PackageReference Include="Dapper" Version="2.0.78" />
+    <PackageReference Include="MailKit" Version="2.10.1" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="5.0.0" />
+    <PackageReference Include="MimeKit" Version="2.10.1" />
+    <PackageReference Include="MySql.Data" Version="8.0.23" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Polly" Version="7.2.1" />
+    <PackageReference Include="StackExchange.Redis.Extensions.Core" Version="6.3.6" />
+    <PackageReference Include="StackExchange.Redis.Extensions.Newtonsoft" Version="6.3.6" />
+  </ItemGroup>
+	
+
+  <ItemGroup>
+    <ProjectReference Include="..\Email.Int.Domain\Email.Int.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
