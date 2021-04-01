@@ -19,7 +19,11 @@ namespace Email.Int.Application.Application.MediatR.Events.SendEmail
 
         public async Task Handle(SendEmailEvent notification, CancellationToken cancellationToken)
         {
-            await _emailSender.Send(notification.Message.Subject, notification.Message.Body, notification.Message.To).ConfigureAwait(false);
+            await _emailSender.Send(notification.Message.Subject, 
+                notification.Message.Body, 
+                notification.Message.From, 
+                notification.Message.To, 
+                notification.Message.Bcs).ConfigureAwait(false);
         }
     }
 }

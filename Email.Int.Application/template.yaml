@@ -8,8 +8,6 @@ Parameters:
     Type: 'AWS::EC2::Subnet::Id'
   SubNetId2:
     Type: 'AWS::EC2::Subnet::Id'
-  SubNetId3:
-    Type: 'AWS::EC2::Subnet::Id'
   EnvironmentType:
     Description: The environment type
     Type: String
@@ -67,15 +65,14 @@ Resources:
             BatchSize: 10            
       Environment:
         Variables:
-          EMAIL_SEND: "andreparis.comp@gmail.com"
-          EMAIL_TO: "andreparis.comp@gmail.com"
+          EMAIL_SEND: "orders@player2.store"
+          EMAIL_TO: "orders@player2.store"
       VpcConfig:
         SecurityGroupIds:
           - !Ref SecurityGroupId
         SubnetIds:
           - !Ref SubNetId1
           - !Ref SubNetId2
-          - !Ref SubNetId3
   SendEmailDlq:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -109,7 +106,6 @@ Resources:
         SubnetIds:
           - !Ref SubNetId1
           - !Ref SubNetId2
-          - !Ref SubNetId3
   #SQS Queues
   SendEmailQueue:
     Type: 'AWS::SQS::Queue'

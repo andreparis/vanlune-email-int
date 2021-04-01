@@ -8,6 +8,6 @@ namespace Email.Int.Domain.Messaging.Email
 {
     public interface IEmailSender
     {
-        Task Send(string subject, string htmlBody, string to);
+        Task Send(string subject, string htmlBody, string from, string to, List<string> bcs);
     }
 }

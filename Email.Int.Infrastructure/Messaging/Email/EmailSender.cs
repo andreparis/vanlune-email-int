@@ -34,7 +34,7 @@ namespace Email.Int.Infrastructure.Messaging.Email
             _logger = logger;
         }
 
-        public async Task Send(string subject, string htmlBody, string to)
+        public async Task Send(string subject, string htmlBody, string from, string to, List<string> bcs)
         {
             _logger.Info($"Sending email To {to}; subject {subject}");
 
@@ -43,7 +43,7 @@ namespace Email.Int.Infrastructure.Messaging.Email
                 var mailMessage = new MimeMessage();
                 mailMessage.From.Add(new MailboxAddress(_sender, _sender));
                 mailMessage.To.Add(new MailboxAddress(to, to));
-                mailMessage.Bcc.AddRange(_to.Select(x => new MailboxAddress(x, x)));
+                mailMessage.Bcc.AddRange(bcs.Select(x => new MailboxAddress(x, x)));
                 mailMessage.Subject = subject;
                 var bodyBuilder = new BodyBuilder
                 {
@@ -52,8 +52,8 @@ namespace Email.Int.Infrastructure.Messaging.Email
                 };
                 mailMessage.Body = bodyBuilder.ToMessageBody();
                 using var smtpClient = new SmtpClient();
-                smtpClient.Connect("smtp.gmail.com", 465, true);
-                smtpClient.Authenticate("andreparis.comp@gmail.com", "m3uVent1l4d0r@&b=om");
+                smtpClient.Connect("smtp.yandex.com", 465, true);
+                smtpClient.Authenticate(from, "@FbDM$ud3u4m)ZL");
                 await smtpClient.SendAsync(mailMessage).ConfigureAwait(false);
                 smtpClient.Disconnect(true);
 
