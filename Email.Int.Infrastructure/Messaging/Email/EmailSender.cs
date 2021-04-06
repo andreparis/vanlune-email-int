@@ -14,23 +14,10 @@ namespace Email.Int.Infrastructure.Messaging.Email
     public class EmailSender : IEmailSender
     {
         private readonly ILogger _logger;
-        private readonly string _sender;
-        private readonly List<string> _to;
 
         public EmailSender(IConfiguration configuration,
             ILogger logger)
         {
-            if (Debugger.IsAttached)
-            {
-                _sender = configuration["Email:sender"];
-                _to = configuration.GetSection("Email:to").Get<List<string>>();
-            }
-            else
-            {
-                _sender = configuration["EMAIL_SEND"];
-                _to = new List<string>() { configuration["EMAIL_TO"] };
-            }
-
             _logger = logger;
         }
 
@@ -41,9 +28,10 @@ namespace Email.Int.Infrastructure.Messaging.Email
             try
             {
                 var mailMessage = new MimeMessage();
-                mailMessage.From.Add(new MailboxAddress(_sender, _sender));
+                mailMessage.From.Add(new MailboxAddress(from, from));
                 mailMessage.To.Add(new MailboxAddress(to, to));
-                mailMessage.Bcc.AddRange(bcs.Select(x => new MailboxAddress(x, x)));
+                if (bcs != null && bcs.Any())
+                    mailMessage.Bcc.AddRange(bcs.Select(x => new MailboxAddress(x, x)));
                 mailMessage.Subject = subject;
                 var bodyBuilder = new BodyBuilder
                 {
